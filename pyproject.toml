@@ -1,0 +1,69 @@
+[project]
+name = "virtualcord"
+version = "0.1.0"
+description = "A simple Discord Rich Presence for VirtualBox VMs on Linux."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "pypresence>=4.6.1",
+    "pyutil>=3.3.6",
+    "virtualbox>=2.1.1",
+]
+
+[dependency-groups]
+dev = [
+    {include-group = "lint"}
+]
+lint = [
+    "black>=25.9.0",
+    "isort>=7.0.0",
+    "pre-commit>=4.3.0",
+    "ruff>=0.14.3",
+]
+
+[tool.uv]
+cache-dir = ".uv_cache"
+python-downloads = "manual"
+offline = false
+
+[tool.black]
+line-length = 88
+target-version = ["py314"]
+skip-string-normalization = false
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | \.ruff_cache
+  | \.uv_cache
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+known_first_party = "wh0share"
+combine_as_imports = true
+
+[tool.ruff]
+line-length = 88
+target-version = "py314"
+lint.select = ["E", "F", "W", "I"]
+lint.ignore = ["E203", "E501"]
+fix = true
+exclude = [
+    ".git",
+    ".venv",
+    "build",
+    "dist",
+    ".ruff_cache",
+    ".uv_cache",
+]
